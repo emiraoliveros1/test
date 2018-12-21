@@ -45,10 +45,10 @@ data['NA_ITEM_UNIT'] = data['NA_ITEM'] + ' (' + data['UNIT'] + ')'
 indicators = data['NA_ITEM_UNIT'].unique()
 countries = data['GEO'].unique()
 
-app.layout = html.Div([
+app.layout = html.Div(style={'backgroundColor':'#98FB98'},children=[
     html.Div([
         html.H1(
-            children = 'Task 1',
+            children = 'Final Project - Emira Oliveros',
                 style = {'font-family': 'Arial, Helvetica, sans-serif', 'text-align': 'center', 'color':'red'}
         ),
         html.Div([
@@ -175,14 +175,18 @@ def update_graph(xaxis_column_name, yaxis_column_name,
         'layout': go.Layout(
             xaxis = {
                 'title': xaxis_column_name,
-                'type': 'linear' if xaxis_type == 'Linear' else 'log'
+                'type': 'linear' if xaxis_type == 'Linear' else 'log',
+                'color':'red'
             },
             yaxis = {
                 'title': yaxis_column_name,
-                'type': 'linear' if yaxis_type == 'Linear' else 'log'
+                'type': 'linear' if yaxis_type == 'Linear' else 'log',
+                'color': 'red'
             },
             margin = {'l': 40, 'b': 40, 't': 40, 'r': 40},
-            hovermode = 'closest'
+            hovermode = 'closest',
+            plot_bgcolor ='#98FB98',
+            paper_bgcolor ='#98FB98'
         )
     }
 
@@ -197,16 +201,27 @@ def update_graph(country_name, yaxis_column_name):
         'data': [go.Scatter(
             x = data[(data['GEO'] == country_name) & (data['NA_ITEM_UNIT'] == yaxis_column_name)]['TIME'].values,
             y = data[(data['GEO'] == country_name) & (data['NA_ITEM_UNIT'] == yaxis_column_name)]['Value'].values,
-            mode = 'lines'
+            mode = 'lines',
+            line={'width': 3, 'color':'red'}
         )],
         'layout': go.Layout(
+            xaxis = {
+                'title':'Year',
+                'titlefont':{'size':10},
+                'color':'red'
+            },
             yaxis = {
                 'title': yaxis_column_name,
                 'titlefont': {'size': 10},
-                'type': 'linear'
+                'type': 'linear',
+                'color':'red',
+                'linecolor':'red'
             },
             margin = {'l': 40, 'b': 40, 't': 40, 'r': 40},
-            hovermode = 'closest'
+            hovermode = 'closest',
+            plot_bgcolor ='#98FB98',
+            paper_bgcolor ='#98FB98'
+            
         )
     }
 
